@@ -1,53 +1,20 @@
 package com.qa.ryledra.TheDemoSite;
 
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 public class TestRunner {
 
-	WebDriver driver;
-	String url = "http://thedemosite.co.uk/";
-	final String cDFilePath = "C:\\Testing\\chromedriver.exe";
-	final String driverType = "webdriver.chrome.driver";
-	final String name = "Bobby";
-	final String pass = "hello";
-	
-	@Before
-	public void setup()	{
-		System.setProperty(driverType, cDFilePath);
-		driver = new ChromeDriver();
-		// driver.manage().window().fullscreen();
-		driver.get(url);
-	}
-	
-	@Test
-	public void test()	{
+	public static void main(String[] args) {
+
+		Result result = JUnitCore.runClasses(TestSuite.class);
+
+		for (Failure failure : result.getFailures()) {
+			System.out.println(failure.getMessage());
+		}
+
 		
-		Index indexPage = PageFactory.initElements(driver, Index.class);
-		indexPage.moveToCreateUser();
-		
-		CreateUser createUserPage = PageFactory.initElements(driver, CreateUser.class);
-		createUserPage.fillUserPassCreate();
-		createUserPage.submitCreate();
-		createUserPage.moveToLogin();
-		
-		Login loginPage = PageFactory.initElements(driver, Login.class);
-		loginPage.fillUserPassLogin();
-		loginPage.submitLogin();
-		
-		assertEquals("**Successful Login**", loginPage.getValidation());
-		//fail();
-	}
-	
-	@After
-	public void tearDown() throws InterruptedException	{
-		Thread.sleep(3000);
-		driver.quit();
+		System.out.println(result.wasSuccessful());
 	}
 }
