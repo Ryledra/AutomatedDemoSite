@@ -4,9 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CreateUser {
-
-	final String name = "Bobby";
-	final String pass = "hello";
 	
 	@FindBy(xpath = "/html/body/div/center/table/tbody/tr[2]/td/div/center/table/tbody/tr/td[2]/p/small/a[4]")
 	private WebElement loginHL;
@@ -20,7 +17,7 @@ public class CreateUser {
 	@FindBy(xpath = "/html/body/table/tbody/tr/td[1]/form/div/center/table/tbody/tr/td[1]/div/center/table/tbody/tr[3]/td[2]/p/input")
 	private WebElement buttonCreate;
 	
-	public void fillUserPassCreate()	{
+	public void fillUserPassCreate(String name, String pass)	{
 		usernameCreate.sendKeys(name);
 		passwordCreate.sendKeys(pass);
 	}
