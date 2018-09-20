@@ -37,6 +37,7 @@ public class CreateUserAndLoginTest {
 		
 		String name = "";
 		String pass = "";
+		String failures = "";
 
 		for (int i = 1; i < data.getPhysicalNumberOfRows(); i++) {
 			
@@ -77,13 +78,14 @@ public class CreateUserAndLoginTest {
 			else	{
 				test.log(LogStatus.FAIL, "log in failed");
 				data.writeResult(false, i);
+				failures += "\n" + name + " failed to log in";
 			}
-
-			assertEquals("Login not successful", "**Successful Login**", loginPage.getValidation());
 
 			report.endTest(test);
 
 		}
+		
+		assertEquals(failures, "", failures);
 		// fail();
 	}
 

@@ -63,6 +63,8 @@ public class DataManager {
 			XSSFRow Row = sheet.getRow(i);
 			XSSFCell Cell = Row.createCell(2);
 			writeResult(passed, i);
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			System.out.println("you left the .xlsx file open");
+		}
 	}
 }
